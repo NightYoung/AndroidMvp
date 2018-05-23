@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //指定Java编译版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation dependenceExtra.appCompat
+    implementation dependenceExtra.v4
+    implementation dependenceExtra.cardView
+    implementation dependenceExtra.design
+
+    implementation dependenceExtra.glide
+    annotationProcessor dependenceExtra.glideCompiler
+
+    implementation dependenceExtra.logger
+    implementation dependenceExtra.jodaTime
+
+    implementation dependenceExtra.rxAndroid
+    implementation dependenceExtra.retrofitAdapter
+
+    implementation dependenceExtra.gson
+}
