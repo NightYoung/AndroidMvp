@@ -40,7 +40,6 @@ public interface ApiStore {
             @Query("start") int startIndex,
             @Query("count") int count);
 
-
     /*** get请求
      * @param url  请求地址
      * @param maps 请求参数
