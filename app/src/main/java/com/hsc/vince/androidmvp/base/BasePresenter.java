@@ -51,8 +51,10 @@ public class BasePresenter<V> {
     /**
      * Rxjava添加注册，使用CompositeSubscription绑定被观察者和观察者，方便管理
      *
-     * @param observable 被观察者，会使用到装饰者
-     * @param subscriber 观察者
+     * @param observable
+     *         被观察者，会使用到装饰者
+     * @param subscriber
+     *         观察者
      */
     protected <T> void addSubscription(Observable<T> observable, Subscriber<T> subscriber) {
         if (mCompositeDisposable == null) {

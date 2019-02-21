@@ -15,16 +15,16 @@ import com.google.gson.annotations.SerializedName;
  * "msg": "失败信息"
  * }
  */
-class HttpStatus<T> {
+public class HttpStatus<T> {
     /*** 请求状态码*/
     @SerializedName("data")
-    Long code;
+    private Long code;
     /***提示信息  请求出错时才会返回msg*/
     @SerializedName("msg")
-    String msg;
+    private String msg;
     /*** 返回的数据*/
     @SerializedName("data")
-    T data;
+    private T data;
 
     public Long getCode() {
         return code;

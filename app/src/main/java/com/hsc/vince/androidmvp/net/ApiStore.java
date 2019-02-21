@@ -14,12 +14,12 @@ import retrofit2.http.Url;
 import rx.Observable;
 
 /**
- * <p>作者：黄思程  2018/4/10 17:02
+ * <p>作者：Night  2018/4/10 17:02
  * <p>邮箱：codinghuang@163.com
  * <p>作用：
  * <p>描述：网络请求仓库
  * <p>
- * POST请求时需要添加  @FormUrlEncoded 注解
+ * POST请求有参数时需要添加  @FormUrlEncoded 注解
  * GET 请求不需要添加该注解
  * <p>
  */
@@ -51,8 +51,8 @@ public interface ApiStore {
      * @param url  请求地址
      * @param maps 请求参数
      * @return 请求结果json字符串*/
-    @FormUrlEncoded
     @POST()
+    @FormUrlEncoded
     Observable<String> post(@Url() String url, @FieldMap Map<String, String> maps);
 
 }

@@ -1,4 +1,4 @@
-package com.hsc.vince.androidmvp.net;
+package com.hsc.vince.androidmvp.net.converter;
 
 import android.support.annotation.Nullable;
 
@@ -20,34 +20,49 @@ import retrofit2.Retrofit;
  * <p>作用：
  * <p>描述：Retrofit 自定义解析类（请求request和返回response解析）
  */
-public class DecodeConvertFactory extends Converter.Factory {
-    private final Gson gson;
+public final class DecodeConverterFactory extends Converter.Factory {
 
-    /***
-     * @return 自定义解析工厂*/
-    public static DecodeConvertFactory create() {
-
+    /**
+     * 自定义解析工厂
+     *
+     * @return DecodeConverterFactory
+     */
+    public static DecodeConverterFactory create() {
         return create(new Gson());
     }
 
-    private static DecodeConvertFactory create(Gson gson) {
-
-        return new DecodeConvertFactory(gson);
+    /**
+     * 自定义解析工厂
+     *
+     * @param gson
+     *         gson
+     * @return DecodeConverterFactory
+     */
+    public static DecodeConverterFactory create(Gson gson) {
+        return new DecodeConverterFactory(gson);
     }
 
-    private DecodeConvertFactory(Gson gson) {
+    private final Gson gson;
+
+    /**
+     * 构造器
+     *
+     * @param gson
+     *         解析json
+     */
+    private DecodeConverterFactory(Gson gson) {
         if (gson == null) {
             throw new NullPointerException("gson == null");
         }
-
         this.gson = gson;
     }
 
-    @Nullable
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         if (type == String.class) {
+            return null;
+        } else if (type == ResponseBody.class) {
             return null;
         }
 
@@ -56,8 +71,7 @@ public class DecodeConvertFactory extends Converter.Factory {
 
     @Nullable
     @Override
-    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations,
-                                                          Annotation[] methodAnnotations, Retrofit retrofit) {
+    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new DecodeRequestBodyConverter<>(gson, adapter);
     }

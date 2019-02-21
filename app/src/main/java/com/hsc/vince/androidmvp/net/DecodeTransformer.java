@@ -1,6 +1,8 @@
 package com.hsc.vince.androidmvp.net;
 
 
+import com.hsc.vince.androidmvp.constant.BoreConstants;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -13,13 +15,21 @@ import rx.schedulers.Schedulers;
  */
 public class DecodeTransformer<T> implements Observable.Transformer<T, T> {
 
+
     @Override
     public Observable<T> call(Observable<T> tObservable) {
         Observable<T> newObservable;
-        newObservable = tObservable
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+        if (BoreConstants.isUnittest) {
+            newObservable = tObservable.subscribeOn(Schedulers.immediate())
+                    .observeOn(Schedulers.immediate());
+        } else {
+            newObservable = tObservable
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+            //.delay(2000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())//模拟延迟,用于观察加载框等效果
+            ;
+        }
         return newObservable;
     }
 }

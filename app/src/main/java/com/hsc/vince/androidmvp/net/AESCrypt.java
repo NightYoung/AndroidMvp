@@ -20,7 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * <p>作者：黄思程  2018/4/11 16:10
+ * <p>作者：Night  2018/4/11 16:10
  * <p>邮箱：codinghuang@163.com
  * <p>作用：
  * <p>描述：加密解密类

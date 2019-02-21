@@ -1,10 +1,11 @@
-package com.hsc.vince.androidmvp.net;
+package com.hsc.vince.androidmvp.net.converter;
 
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.hsc.vince.androidmvp.net.HttpStatus;
 
 import java.io.IOException;
 
@@ -30,6 +31,16 @@ class DecodeResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     public T convert(@NonNull ResponseBody value) throws IOException {
         //在这里进行加解密操作
         String response = value.string();
+
+        //是否需要解密字符串
+       /* if (!notDecrypts) {
+            try {
+                response = AESCrypt.getInstance().decrypt(value.string());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
+
         HttpStatus<T> httpStatus = gson.fromJson(response, new TypeToken<HttpStatus<T>>() {
         }.getType());
 
